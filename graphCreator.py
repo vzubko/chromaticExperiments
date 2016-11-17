@@ -9,3 +9,7 @@ def randomGraph(nodes, edges):
 def prefAttach(nodes,edges):
     g = nx.barabasi_albert_graph(nodes,edges)
     return g
+
+def clusterGraph(nodes,edges,p):
+    g = nx.powerlaw_cluster_graph(nodes,edges,p)
+    return g
