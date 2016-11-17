@@ -4,5 +4,7 @@ import networkx as nx
 
 def greedy(g):
     greedy = nx.greedy_color(g)
-    return max(greedy.values()) + 1
+    return greedy
 
+def chromaticNumber(coloring):
+    return max(coloring.values()) + 1
