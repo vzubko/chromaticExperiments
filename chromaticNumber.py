@@ -2,8 +2,8 @@
 
 import networkx as nx
 
-def greedy(g):
-    greedy = nx.greedy_color(g)
+def greedy(g,strategy):
+    greedy = nx.greedy_color(g,strategy)
     return greedy
 
 def chromaticNumber(coloring):
