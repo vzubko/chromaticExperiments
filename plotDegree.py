@@ -1,5 +1,3 @@
-
-import networkx as nx
 import matplotlib.pyplot as plt
 import graphCreator as graphs
 import chromaticNumber as cnum
@@ -60,6 +58,9 @@ def getDegreeStatistics(graph, maxDegree):
     plt.bar(myrange(maxDegree+0.5, 0), stayed, width=0.2, color='yellow')
     plt.bar(myrange(maxDegree+0.5, 0.2), other, width=0.2, color='red')
     plt.gca().set_xticks(range(maxDegree + 1))
+    plt.ylabel('Number of nodes')
+    plt.xlabel('Degree')
+    plt.title('Change in chromatic number as dependence on degree')
     plt.show()
 
 print(getDegreeStatistics(graph,17))

@@ -1,12 +1,9 @@
 import networkx as nx
-import matplotlib.pyplot as plt
 import graphCreator as graphs
 import chromaticNumber as cnum
 
 graph = graphs.clusterGraph(50,14,0.6)
 
-
-print(nx.average_clustering(graph))
 
 def getChromaticNumber(numberOfNodes, listOfEdges):
     coloring = cnum.getColoringHEA(numberOfNodes, listOfEdges)
@@ -18,10 +15,9 @@ def getClusteringList(graph):
     for node in range(len(graph.nodes())):
         cluster = nx.clustering(graph,node)
         clusterList.append(cluster)
-    clusteringList = ['%.1f' % elem for elem in clusterList]
+    clusteringList = [int(elem * 10) for elem in clusterList]
     return clusteringList
 
-print(getClusteringList(graph))
 
 def getHighestClusterNodes(graph,coefficient):
     clusterList = getClusteringList(graph)
@@ -30,8 +26,6 @@ def getHighestClusterNodes(graph,coefficient):
         if float(clusterList[node]) >= coefficient:
             highestClusterNodes.append(node)
     return highestClusterNodes
-
-print(getHighestClusterNodes(graph, 0.6))
 
 
 def getChromaticWithoutClusterNodes(graph, listOfNodes):
@@ -43,18 +37,15 @@ def getChromaticWithoutClusterNodes(graph, listOfNodes):
     c = getChromaticNumber(len(graph.nodes()), removedEdges)
     return c
 
-print(getChromaticWithoutClusterNodes(graph,getHighestClusterNodes(graph, 0.6)))
-
 
 def getNodesOfSameCluster(graph, coefficient):
     clusterList = getClusteringList(graph)
     sameClusterNodes = []
     for node in range(len(clusterList)):
-        if float(clusterList[node]) == coefficient:
+        if clusterList[node] == int(coefficient*10):
             sameClusterNodes.append(node)
     return sameClusterNodes
 
-print(getNodesOfSameCluster(graph,0.6))
 
 def getChromaticRemovedOfSameCluster(graph,listOfNodes):
     chromaticList = []

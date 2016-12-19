@@ -1,12 +1,8 @@
-
 import graphCreator as graphs
 import chromaticNumber as cnum
 
 
 graph = graphs.karateClub()
-
-degree = graph.degree()
-print(degree)
 
 
 def getChromaticNumber(numberOfNodes, listOfEdges):
