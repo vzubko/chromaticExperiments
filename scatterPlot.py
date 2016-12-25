@@ -2,8 +2,7 @@ import matplotlib.pyplot as plt
 import graphCreator as graphs
 import chromaticNumber as cnum
 import networkx as nx
-
-graph = graphs.randomGraph(100,1000)
+import random
 
 def getChromaticNumber(numberOfNodes, listOfEdges):
     coloring = cnum.getColoringHEA(numberOfNodes, listOfEdges)
@@ -39,7 +38,8 @@ def getChromaticWithoutNodes(graph, listOfNodes):
     return c
 
 
-def getColorsChanged(graph, originalChr):
+def getColorsChanged(graph):
+    originalChr = graphChromatic(graph)
     colors = []
     for node in range(len(graph.nodes())):
         c = getChromaticWithoutNodes(graph, [node])
@@ -51,6 +51,17 @@ def getColorsChanged(graph, originalChr):
             colors.append('red')
     return colors
 
+x = []
+y = []
+c = []
+for i in range(5):
+    print("graph", i)
+    g = graphs.prefAttach(random.randint(50, 200), random.randint(5, 30))
+    # g = graphs.clusterGraph(random.randint(50, 200), random.randint(5, 30), random.random() * 0.5 + 0.45)
+    x += getDegreeList(g)
+    y += getClusteringList(g)
+    c += getColorsChanged(g)
 
-plt.scatter(getDegreeList(graph), getClusteringList(graph), c=getColorsChanged(graph,graphChromatic(graph)))
+
+plt.scatter(x, y, c=c)
 plt.show()
