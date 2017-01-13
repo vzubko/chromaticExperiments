@@ -58,7 +58,7 @@ def myrange(upto, offset):
     return l
 
 
-maxCNumber = 10
+maxCNumber = 200
 reduced = []
 stayed = []
 other = []
@@ -69,9 +69,9 @@ for i in range(maxCNumber):
     other.append(0)
 
 
-for i in range(5):
+for i in range(150):
     print("graph", i)
-    g = graphs.randomGraph(random.randint(5, 10), random.randint(20, 30))
+    g = graphs.randomGraph(random.randint(50, 150), random.randint(800, 4000))
     originalChr = graphChromatic(g)
     countC.append(originalChr)
     a, b, c = sortChanges(g, originalChr, g.nodes())
@@ -81,13 +81,19 @@ for i in range(5):
 
 print('reduced:', reduced, 'stayed:', stayed, 'other:', other)
 
+for x in range(maxCNumber):
+    total = reduced[x] + stayed[x] + other[x]
+    if total > 0:
+        reduced[x] = reduced[x]*100/total
+        stayed[x] = stayed[x]*100/total
+        other[x] = other[x]*100/total
 
 
 plt.bar(myrange(maxCNumber-0.5, -0.2), reduced, width=0.2, color='green')
 plt.bar(myrange(maxCNumber-0.5, 0), stayed, width=0.2, color='yellow')
 plt.bar(myrange(maxCNumber-0.5, 0.2), other, width=0.2, color='red')
 plt.gca().set_xticks(range(maxCNumber + 1))
-plt.ylabel('Number of nodes')
-plt.xlabel('Chromatic Number')
-plt.title('Change in chromatic number with many random graphs')
+plt.ylabel('Percentage of nodes')
+plt.xlabel('Chromatic number')
+plt.title('Visualizing important nodes by chromatic numbers')
 plt.show()
